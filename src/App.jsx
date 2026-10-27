@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Activity, Bot, CheckCircle2, Copy, Dumbbell, FileText, ShieldCheck, Sparkles } from 'lucide-react';
 
-const starter = '¡Hola! Soy tu asistente de movimiento en casa. Contame cuánto tiempo tenés hoy (5, 10, 15 o 30 minutos) y si preferís movilidad, ejercicios suaves o una rutina general.';
-
 import { createFitnessPlan, makeDraft } from './agentLogic.js';
+
+const starter = '¡Hola! Soy tu asistente de movimiento en casa. Contame cuánto tiempo tenés hoy (5, 10, 15 o 30 minutos) y si preferís movilidad, ejercicios suaves o una rutina general.';
 
 export default function App() {
   const [tab, setTab] = useState('fit');
