@@ -1,23 +1,26 @@
 export function createFitnessPlan({ minutes = 10, level = 'Principiante', kind = 'Suave y sin saltos' } = {}) {
   const allowedMinutes = [5, 10, 15, 30];
   const duration = allowedMinutes.includes(Number(minutes)) ? Number(minutes) : 10;
+  const warmup = duration === 5 ? 1 : 2;
+  const cooldown = duration === 5 ? 1 : 2;
+  const main = duration - warmup - cooldown;
   const safeLevel = String(level || 'Principiante').slice(0, 60);
   const safeKind = String(kind || 'Suave y sin saltos').slice(0, 80);
   const lowImpact = safeKind.toLowerCase().includes('salto');
   return `PLAN GENERAL DE ${duration} MINUTOS · ${safeLevel.toUpperCase()}
 Preferencia: ${safeKind}
 
-1. INICIO (2 minutos)
+1. INICIO (${warmup} ${warmup === 1 ? 'minuto' : 'minutos'})
 Marchá suavemente en el lugar y mové hombros y tobillos sin forzar.
 
-2. BLOQUE PRINCIPAL (${Math.max(2, duration - 4)} minutos)
+2. BLOQUE PRINCIPAL (${main} ${main === 1 ? 'minuto' : 'minutos'})
 • Marcha cómoda en el lugar.
 • Sentarse y levantarse de una silla firme, solo si resulta cómodo.
 • Flexiones contra la pared.
 • Movilidad suave de hombros y cadera.
 Alterná cada movimiento con pausas. Reducí el rango o descansá cuando lo necesites.${lowImpact ? '\nElegí variantes lentas y de bajo impacto; no hace falta saltar.' : ''}
 
-3. CIERRE (2 minutos)
+3. CIERRE (${cooldown} ${cooldown === 1 ? 'minuto' : 'minutos'})
 Bajá el ritmo y respirá con normalidad; mové suavemente brazos y piernas.
 
 SEGURIDAD
