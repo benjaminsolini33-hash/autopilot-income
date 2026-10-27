@@ -75,6 +75,7 @@ CHECKLIST ANTES DE PUBLICAR
 - Confirmar que no haya promesas médicas, resultados garantizados ni material con derechos ajenos.
 
 Nota: calendario de ideas generado localmente, no publicaciones automáticas ni garantía de alcance o ingresos.`;
+  if (format === 'Prompt para video IA') return `PROMPT PARA VIDEO VERTICAL 9:16\n\nCrear un video de 20–25 segundos para ${safeAudience}, en una casa argentina luminosa, con tono cálido y realista. Mostrar a una persona adulta con ropa cómoda haciendo movimientos suaves en un espacio despejado, sin equipamiento ni saltos. Usar planos breves, cámara estable y luz natural.\n\nSECUENCIA\n0–3 s: gancho visual de una persona que encuentra un pequeño momento libre.\n3–10 s: marcha suave en el lugar y movilidad de hombros.\n10–17 s: variante sentada o flexiones contra la pared.\n17–22 s: pausa y respiración normal.\n22–25 s: cierre con espacio para texto y CTA.\n\nTEXTO EN PANTALLA\n“¿Poco tiempo? Empezá suave”.\n“Adaptá los movimientos a tu comodidad”.\n“Conocé Autopilot Fit AI: ${cta}”\n\nAUDIO: música instrumental genérica, sin canciones protegidas. Añadir subtítulos legibles en español rioplatense. No mostrar antes/después, promesas médicas, pérdida de peso garantizada, marcas ni logotipos ajenos.\n\nObjetivo: ${safeGoal}. Revisar el video generado, los derechos de audio y el enlace antes de publicar. Esto es un prompt; no genera el archivo de video por sí solo.`;
   if (format === 'Video vertical') return `BORRADOR PARA ${safePlatform.toUpperCase()}
 Público: ${safeAudience}
 Objetivo: ${safeGoal}
