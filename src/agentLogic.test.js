@@ -28,3 +28,31 @@ test('non-video marketing draft does not invent an affiliate link', () => {
   assert.match(draft, /No inventa ni verifica ofertas afiliadas/);
   assert.doesNotMatch(draft, /go\.hotmart\.com/);
 });
+
+test('fitness plan bounds user-provided labels and handles empty values', () => {
+  const plan = createFitnessPlan({ level: 'L'.repeat(200), kind: '' });
+  assert.ok(plan.includes('L'.repeat(60).toUpperCase()));
+  assert.ok(!plan.includes('L'.repeat(61)));
+  assert.match(plan, /Preferencia: Suave y sin saltos/);
+});
+
+test('marketing draft bounds audience, platform and goal input lengths', () => {
+  const draft = makeDraft({
+    platform: 'P'.repeat(200),
+    format: 'Publicación',
+    audience: 'A'.repeat(500),
+    goal: 'G'.repeat(200)
+  });
+  assert.ok(draft.includes('P'.repeat(80).toUpperCase()));
+  assert.ok(draft.includes('A'.repeat(240)));
+  assert.ok(!draft.includes('A'.repeat(241)));
+  assert.ok(draft.includes('G'.repeat(100)));
+  assert.ok(!draft.includes('G'.repeat(101)));
+});
+
+test('unknown marketing format uses the safe generic draft, not video claims', () => {
+  const draft = makeDraft({ format: 'formato desconocido' });
+  assert.match(draft, /borrador ilustrativo generado localmente/i);
+  assert.doesNotMatch(draft, /GANCHO \(0–3 s\)/);
+  assert.doesNotMatch(draft, /go\.hotmart\.com/);
+});
