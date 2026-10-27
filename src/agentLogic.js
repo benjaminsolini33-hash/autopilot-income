@@ -32,6 +32,49 @@ export function makeDraft({ platform = 'General', format = 'Video vertical', aud
   const safePlatform = String(platform).slice(0, 80);
   const safeGoal = String(goal).slice(0, 100);
   const cta = 'https://autopilot-income.floot.app/entrenador';
+  if (format === 'Plan semanal') return `PLAN SEMANAL DE CONTENIDO · ${safePlatform.toUpperCase()}
+Público: ${safeAudience}
+Objetivo: ${safeGoal}
+
+DÍA 1 · IDENTIFICACIÓN
+Gancho: “¿Sentís que no te alcanza el día?”
+Idea: normalizar empezar con pocos minutos.
+Formato: video breve con texto en pantalla.
+CTA: probá organizar un momento para vos.
+
+DÍA 2 · CONSEJO PRÁCTICO
+Gancho: “Una pausa activa que podés hacer en casa”
+Idea: mostrar marcha suave en el lugar y movilidad cómoda de hombros.
+Nota: ofrecer una alternativa sentada.
+
+DÍA 3 · MITO Y REALIDAD
+Gancho: “No hace falta hacerlo perfecto para empezar”
+Idea: explicar que la constancia realista importa más que una rutina ideal.
+Evitar promesas sobre pérdida de peso o resultados garantizados.
+
+DÍA 4 · PARTICIPACIÓN
+Pregunta: “¿Qué te cuesta más: encontrar tiempo o empezar?”
+Objetivo: invitar a comentar sin pedir datos personales.
+
+DÍA 5 · MINI RUTINA
+Idea: secuencia general de movilidad suave con opciones de pausa.
+Seguridad: adaptar movimientos y frenar ante dolor, mareo o malestar.
+
+DÍA 6 · DETRÁS DE ESCENA
+Idea: mostrar cómo se prepara una rutina sencilla y realista.
+CTA: guardar la publicación para revisarla más tarde.
+
+DÍA 7 · RESUMEN Y RECURSO
+Idea: resumir tres ideas útiles de la semana.
+CTA: conocer el asistente gratuito: ${cta}
+
+CHECKLIST ANTES DE PUBLICAR
+- Revisar exactitud, accesibilidad y lenguaje inclusivo.
+- Añadir subtítulos y texto alternativo cuando corresponda.
+- Verificar enlaces y cualquier oferta afiliada; declarar la relación comercial.
+- Confirmar que no haya promesas médicas, resultados garantizados ni material con derechos ajenos.
+
+Nota: calendario de ideas generado localmente, no publicaciones automáticas ni garantía de alcance o ingresos.`;
   if (format === 'Video vertical') return `BORRADOR PARA ${safePlatform.toUpperCase()}
 Público: ${safeAudience}
 Objetivo: ${safeGoal}
