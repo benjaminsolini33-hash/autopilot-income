@@ -56,3 +56,21 @@ test('unknown marketing format uses the safe generic draft, not video claims', (
   assert.doesNotMatch(draft, /GANCHO \(0–3 s\)/);
   assert.doesNotMatch(draft, /go\.hotmart\.com/);
 });
+
+test('five-minute fitness plan allocates exactly five minutes', () => {
+  const plan = createFitnessPlan({ minutes: 5 });
+  assert.match(plan, /INICIO \(1 minuto\)/);
+  assert.match(plan, /BLOQUE PRINCIPAL \(3 minutos\)/);
+  assert.match(plan, /CIERRE \(1 minuto\)/);
+});
+
+test('supported fitness durations have matching section totals', () => {
+  for (const minutes of [5, 10, 15, 30]) {
+    const plan = createFitnessPlan({ minutes });
+    const sectionMinutes = [...plan.matchAll(/\((\d+) minutos?\)/g)]
+      .map(match => Number(match[1]))
+      .slice(0, 3)
+      .reduce((sum, value) => sum + value, 0);
+    assert.equal(sectionMinutes, minutes, `duration ${minutes} should sum correctly`);
+  }
+});
