@@ -74,3 +74,14 @@ test('supported fitness durations have matching section totals', () => {
     assert.equal(sectionMinutes, minutes, `duration ${minutes} should sum correctly`);
   }
 });
+
+test('weekly marketing plan includes seven daily ideas and responsible review checklist', () => {
+  const draft = makeDraft({ platform: 'Instagram / Reels', format: 'Plan semanal', audience: 'Adultos ocupados', goal: 'Crear comunidad' });
+  for (const day of ['DÍA 1', 'DÍA 2', 'DÍA 3', 'DÍA 4', 'DÍA 5', 'DÍA 6', 'DÍA 7']) {
+    assert.ok(draft.includes(day), `weekly plan should include ${day}`);
+  }
+  assert.match(draft, /CHECKLIST ANTES DE PUBLICAR/);
+  assert.match(draft, /declarar la relación comercial/);
+  assert.match(draft, /no publicaciones automáticas/i);
+  assert.doesNotMatch(draft, /go\.hotmart\.com/);
+});
