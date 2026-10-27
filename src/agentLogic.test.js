@@ -85,3 +85,10 @@ test('weekly marketing plan includes seven daily ideas and responsible review ch
   assert.match(draft, /no publicaciones automáticas/i);
   assert.doesNotMatch(draft, /go\.hotmart\.com/);
 });
+test('AI video prompt includes a safe production brief and clarifies it is not a video file', () => {
+  const draft = makeDraft({ format: 'Prompt para video IA', platform: 'TikTok', audience: 'Adultos ocupados', goal: 'Atraer visitas' });
+  assert.match(draft, /PROMPT PARA VIDEO VERTICAL 9:16/);
+  assert.match(draft, /subtítulos legibles/);
+  assert.match(draft, /no genera el archivo de video por sí solo/i);
+  assert.doesNotMatch(draft, /go\.hotmart\.com/);
+});
