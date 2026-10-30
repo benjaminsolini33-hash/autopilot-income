@@ -1,4 +1,6 @@
 import http from 'node:http';
+import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 
 const MODEL = 'gemini-3.8-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
@@ -81,7 +83,7 @@ export function createApiServer({ apiKey = process.env.GEMINI_API_KEY, fetchImpl
   });
 }
 
-if (process.argv[1] && new URL(import.meta.url).pathname === process.argv[1].replaceAll('\\\\', '/')) {
+if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
   const port = Number(process.env.PORT || 8787);
   createApiServer().listen(port, '127.0.0.1', () => {
     console.log(`Autopilot API escuchando en http://127.0.0.1:${port}`);
