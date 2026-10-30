@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Activity, Bot, CheckCircle2, Copy, Download, Dumbbell, FileText, ShieldCheck, Sparkles } from 'lucide-react';
 
 import { createFitnessPlan, makeDraft } from './agentLogic.js';
@@ -17,6 +17,12 @@ export default function App() {
   const [goal, setGoal] = useState('Atraer visitas al asistente gratuito');
   const [marketingDraft, setMarketingDraft] = useState('');
   const [notice, setNotice] = useState('');
+  const [aiBusy, setAiBusy] = useState(false);
+  const [aiStatus, setAiStatus] = useState('Comprobando backend…');
+
+  useEffect(() => {
+    fetch('/api/health').then(r => r.json()).then(data => setAiStatus(data.configured ? 'Gemini disponible · ' + data.model : 'Backend listo; falta configurar la clave local')).catch(() => setAiStatus('Backend todavía no iniciado'));
+  }, []);
 
   async function copy(text) {
     try { await navigator.clipboard.writeText(text); setNotice('Texto copiado.'); }
@@ -36,9 +42,23 @@ export default function App() {
     setNotice('Borrador descargado como archivo de texto.');
   }
 
+  async function generateWithAI(task, details, onSuccess) {
+    setAiBusy(true);
+    setNotice('Consultando Gemini…');
+    try {
+      const response = await fetch('/api/generate', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ task, details }) });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'No se pudo generar el borrador.');
+      onSuccess(data.text);
+      setNotice('Borrador generado con ' + data.model + '. Revisalo antes de usarlo.');
+    } catch (error) {
+      setNotice(error.message || 'No se pudo conectar con Gemini.');
+    } finally { setAiBusy(false); }
+  }
+
   function createFitnessPlanDraft() {
     setFitnessDraft(createFitnessPlan({ minutes, level, kind }));
-    setNotice('Plan general preparado en este navegador; no se llamó a un servicio de IA.');
+    setNotice('Plan general de plantilla preparado localmente.');
   }
 
   function createMarketingDraft() {
@@ -47,13 +67,13 @@ export default function App() {
   }
 
   return <div className="app-shell">
-    <header className="topbar"><a className="brand" href="#inicio"><span className="brand-icon"><Bot size={22}/></span><span><strong>Autopilot Fit AI</strong><small>Movimiento realista · marketing responsable</small></span></a><span className="status"><span className="status-dot"/> Prototipo local</span></header>
+    <header className="topbar"><a className="brand" href="#inicio"><span className="brand-icon"><Bot size={22}/></span><span><strong>Autopilot Fit AI</strong><small>Movimiento realista · marketing responsable</small></span></a><span className="status"><span className="status-dot"/> {aiStatus}</span></header>
     <main id="inicio">
       <section className="hero"><div className="eyebrow"><Sparkles size={15}/> TU ASISTENTE PARA DÍAS OCUPADOS</div><h1>Un poco de movimiento.<br/><em>A tu ritmo.</em></h1><p>Prepará ideas generales para moverte en casa y borradores de contenido orgánico. Sin promesas mágicas ni publicaciones automáticas.</p><div className="hero-points"><span><ShieldCheck size={16}/> Seguridad primero</span><span><CheckCircle2 size={16}/> Sin gasto automático</span></div></section>
       <nav className="tabs" aria-label="Herramientas"><button className={tab === 'fit' ? 'active' : ''} onClick={() => { setTab('fit'); setNotice(''); }}><Activity size={17}/> Movimiento</button><button className={tab === 'marketing' ? 'active' : ''} onClick={() => { setTab('marketing'); setNotice(''); }}><FileText size={17}/> Marketing orgánico</button></nav>
-      {tab === 'fit' ? <section className="workspace"><div className="section-intro"><div className="section-icon"><Dumbbell size={20}/></div><div><h2>Organizá unos minutos para vos</h2><p>{starter}</p></div></div><div className="form-grid"><label>Tiempo disponible<select value={minutes} onChange={e => setMinutes(e.target.value)}><option value="5">5 minutos</option><option value="10">10 minutos</option><option value="15">15 minutos</option><option value="30">30 minutos</option></select></label><label>Experiencia<select value={level} onChange={e => setLevel(e.target.value)}><option>Principiante</option><option>Intermedio</option><option>Prefiero algo muy suave</option></select></label><label className="wide">Preferencia<select value={kind} onChange={e => setKind(e.target.value)}><option>Suave y sin saltos</option><option>Movilidad general</option><option>Rutina general</option></select></label></div><button className="primary" onClick={createFitnessPlanDraft}><Sparkles size={17}/> Preparar plan general</button>{fitnessDraft && <Draft text={fitnessDraft} onCopy={() => copy(fitnessDraft)} onDownload={() => download(fitnessDraft)}/>}<p className="fineprint">Prototipo informativo: no reemplaza a profesionales de salud ni a entrenadores certificados.</p></section> : <section className="workspace"><div className="section-intro"><div className="section-icon"><FileText size={20}/></div><div><h2>Prepará contenido sin presupuesto</h2><p>Genera una estructura de borrador dentro del navegador. Aún no está conectado a una IA ni a redes sociales.</p></div></div><div className="form-grid"><label>Plataforma<select value={platform} onChange={e => setPlatform(e.target.value)}><option>Instagram / Reels</option><option>TikTok</option><option>YouTube Shorts</option><option>Facebook</option><option>Blog</option></select></label><label>Formato<select value={format} onChange={e => setFormat(e.target.value)}><option>Video vertical</option><option>Publicación</option><option>Plan semanal</option><option>Prompt para video IA</option></select></label><label className="wide">Público objetivo<input value={audience} onChange={e => setAudience(e.target.value)} maxLength={160}/></label><label className="wide">Objetivo<select value={goal} onChange={e => setGoal(e.target.value)}><option>Atraer visitas al asistente gratuito</option><option>Educar sobre hábitos de movimiento</option><option>Crear comunidad</option><option>Presentar un recurso afiliado verificado</option></select></label></div><button className="primary" onClick={createMarketingDraft}><Sparkles size={17}/> Crear borrador</button>{marketingDraft && <Draft text={marketingDraft} onCopy={() => copy(marketingDraft)} onDownload={() => download(marketingDraft)}/>}<div className="warning"><ShieldCheck size={18}/><p><strong>Antes de publicar:</strong> verificá cualquier HotLink en Hotmart. El enlace afiliado anterior fue reportado como problemático; este prototipo no inventa ni reemplaza enlaces y no publica contenido.</p></div></section>}
+      {tab === 'fit' ? <section className="workspace"><div className="section-intro"><div className="section-icon"><Dumbbell size={20}/></div><div><h2>Organizá unos minutos para vos</h2><p>{starter}</p></div></div><div className="form-grid"><label>Tiempo disponible<select value={minutes} onChange={e => setMinutes(e.target.value)}><option value="5">5 minutos</option><option value="10">10 minutos</option><option value="15">15 minutos</option><option value="30">30 minutos</option></select></label><label>Experiencia<select value={level} onChange={e => setLevel(e.target.value)}><option>Principiante</option><option>Intermedio</option><option>Prefiero algo muy suave</option></select></label><label className="wide">Preferencia<select value={kind} onChange={e => setKind(e.target.value)}><option>Suave y sin saltos</option><option>Movilidad general</option><option>Rutina general</option></select></label></div><div className="action-row"><button className="primary" onClick={createFitnessPlanDraft}>Preparar plantilla local</button><button className="primary" disabled={aiBusy} onClick={() => generateWithAI('fitness', 'Duración: ' + minutes + ' minutos. Experiencia: ' + level + '. Preferencia: ' + kind + '.', setFitnessDraft)}><Sparkles size={17}/> {aiBusy ? 'Generando…' : 'Generar con Gemini'}</button></div>{fitnessDraft && <Draft text={fitnessDraft} onCopy={() => copy(fitnessDraft)} onDownload={() => download(fitnessDraft)}/>}<p className="fineprint">Prototipo informativo: no reemplaza a profesionales de salud ni a entrenadores certificados.</p></section> : <section className="workspace"><div className="section-intro"><div className="section-icon"><FileText size={20}/></div><div><h2>Prepará contenido sin presupuesto</h2><p>Creá borradores localmente o con Gemini cuando el backend esté configurado. No se publica nada en redes.</p></div></div><div className="form-grid"><label>Plataforma<select value={platform} onChange={e => setPlatform(e.target.value)}><option>Instagram / Reels</option><option>TikTok</option><option>YouTube Shorts</option><option>Facebook</option><option>Blog</option></select></label><label>Formato<select value={format} onChange={e => setFormat(e.target.value)}><option>Video vertical</option><option>Publicación</option><option>Plan semanal</option><option>Prompt para video IA</option></select></label><label className="wide">Público objetivo<input value={audience} onChange={e => setAudience(e.target.value)} maxLength={160}/></label><label className="wide">Objetivo<select value={goal} onChange={e => setGoal(e.target.value)}><option>Atraer visitas al asistente gratuito</option><option>Educar sobre hábitos de movimiento</option><option>Crear comunidad</option><option>Presentar un recurso afiliado verificado</option></select></label></div><div className="action-row"><button className="primary" onClick={createMarketingDraft}>Crear plantilla local</button><button className="primary" disabled={aiBusy} onClick={() => generateWithAI(format === 'Video vertical' || format === 'Prompt para video IA' ? 'video_script' : 'marketing', 'Plataforma: ' + platform + '. Formato: ' + format + '. Público: ' + audience + '. Objetivo: ' + goal + '. Marca: Autopilot Fit AI. Prepará un borrador en español rioplatense. No inventes enlaces; CTA sin URL hasta verificar el destino.', setMarketingDraft)}><Sparkles size={17}/> {aiBusy ? 'Generando…' : 'Generar con Gemini'}</button></div>{marketingDraft && <Draft text={marketingDraft} onCopy={() => copy(marketingDraft)} onDownload={() => download(marketingDraft)}/>}<div className="warning"><ShieldCheck size={18}/><p><strong>Antes de publicar:</strong> verificá cualquier HotLink en Hotmart. El enlace afiliado anterior fue reportado como problemático; este prototipo no inventa ni reemplaza enlaces y no publica contenido.</p></div></section>}
       {notice && <p className="notice" role="status">{notice}</p>}
-      <section className="migration-note"><strong>Estado técnico</strong><p>Esta es una base inicial independiente para migrar el proyecto. Todavía no conecta la base de datos, las cuentas, el servicio de IA ni las automatizaciones originales de Floot. No se ejecutan tareas en segundo plano.</p><a href="https://autopilot-income.floot.app" target="_blank" rel="noreferrer">Abrir versión actual en Floot ↗</a></section>
+      <section className="migration-note"><strong>Estado técnico</strong><p>Esta es una base inicial independiente para migrar el proyecto. Gemini se consulta desde un backend Node local cuando está configurado. No hay publicación social, base de datos ni tareas en segundo plano.</p><a href="https://autopilot-income.floot.app" target="_blank" rel="noreferrer">Abrir versión actual en Floot ↗</a></section>
     </main><footer>Autopilot Income · Prototipo de migración · Sin garantía de ingresos ni de resultados físicos</footer>
   </div>;
 }
