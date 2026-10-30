@@ -1,50 +1,52 @@
 # Autopilot Fit AI
 
-Prototipo independiente para el proyecto Autopilot Income: asistente informativo de movimiento en casa y borradores de marketing orgánico.
+Prototipo independiente para Autopilot Income: asistente de movimiento en casa, borradores de marketing y backend opcional de IA.
 
-## Funciones disponibles en el prototipo
+## Funciones del prototipo
 
-- Planes generales de movimiento en casa para 5, 10, 15 o 30 minutos, con indicaciones básicas de seguridad.
-- Borradores de marketing para contenido vertical y publicaciones.
-- Plan semanal con siete ideas de contenido y una lista de revisión responsable.
-- Prompt de producción para una herramienta externa de video IA: propone escenas, textos, formato vertical y pautas de accesibilidad. **No crea un archivo de video.**
-- Pruebas automatizadas para la lógica principal y compilación de producción mediante GitHub Actions.
+- Plantillas locales de planes generales de movimiento y marketing.
+- Backend Node.js para generación de texto con Gemini 3.8 Flash.
+- Tareas permitidas: fitness, marketing y guiones de video.
+- Pruebas automatizadas y compilación mediante GitHub Actions.
+- Los guiones y prompts son borradores; no equivalen a un archivo de video terminado.
 
-## Estado real: qué está y qué no está activo
+## Estado y límites
 
-- La generación actual es local y basada en plantillas; **no está conectada a un modelo de IA**.
-- No hay base de datos, autenticación ni endpoints de la versión de Floot en este prototipo.
-- No publica en redes, no programa tareas en segundo plano, no ejecuta campañas ni realiza gastos.
-- El enlace de afiliado de Hotmart previamente reportado con error 404 permanece sin promocionar hasta verificar un HotLink válido desde la cuenta de afiliado.
-- La versión original de Floot se conserva sin cambios: https://autopilot-income.floot.app
+- El backend usa `GEMINI_API_KEY` solo en el servidor; nunca usar una variable `VITE_*` para secretos.
+- El modelo queda fijado en `gemini-3.8-flash`; el navegador no puede elegir modelos ni enviar claves.
+- Límite básico: 8 solicitudes por minuto y por IP en cada instancia. Es una protección inicial en memoria, no un limitador distribuido para producción.
+- Sin autenticación, base de datos, publicación social, campañas ni tareas programadas.
+- No se activa facturación ni se configura hosting. La disponibilidad gratuita depende de las cuotas vigentes de Google.
+- El uso de la API gratuita puede estar sujeto a condiciones de tratamiento de datos del proveedor; no enviar datos personales sensibles.
+- El enlace Hotmart con error 404 sigue sin promocionarse hasta verificar un HotLink válido.
+- La aplicación Floot original se conserva sin cambios: https://autopilot-income.floot.app
 
-## Ejecutar localmente
+## Requisitos
 
-Requisitos: Node.js LTS y npm. Desde la carpeta del repositorio:
+Node.js 22 o superior y npm. No hace falta instalar Python.
+
+## Arranque local (Windows PowerShell)
+
+1. Copiá `.env.example` a un archivo local llamado `.env` y cargá `GEMINI_API_KEY` allí. El archivo `.env` está excluido de Git.
+2. PowerShell no carga automáticamente archivos `.env`; para esta versión, en la terminal del servidor ejecutá:
+   `$env:GEMINI_API_KEY="TU_CLAVE"`
+3. En una terminal: `npm install` y luego `npm run server`.
+4. En otra terminal: `npm run dev`.
+5. Abrí la URL local que informa Vite. El frontend usa el proxy `/api` hacia el backend local.
+
+No pegues la clave en el código, en el navegador, en GitHub ni en este chat. No configures facturación para probar. Si la cuota gratuita se agota, la API debe devolver un error sin habilitar pagos.
+
+## Comandos de validación
 
 ```bash
-npm install
 npm test
-npm run dev
-```
-
-Para validar la compilación de producción:
-
-```bash
 npm run build
-npm run preview
 ```
 
-La interfaz de desarrollo local no equivale a un sitio publicado en internet.
+## Próximos pasos antes de producción
 
-## Seguridad y costos
-
-No guardes claves, tokens, credenciales ni datos de usuarios en este repositorio. No expongas claves de IA en variables `VITE_*` ni en código del navegador. Las dependencias declaradas son gratuitas y de código abierto; el uso de proveedores de IA, bases de datos o hosting puede tener límites, condiciones de privacidad o costos. No se habilitará ningún servicio pago sin autorización explícita.
-
-## Próximas etapas
-
-1. Elegir una opción de ejecución backend que tenga un nivel gratuito verificable y permita guardar secretos del lado del servidor.
-2. Evaluar un proveedor de IA y sus límites, privacidad y condiciones antes de conectarlo.
-3. Añadir un endpoint seguro con límites de uso para evitar abuso o consumos inesperados.
-4. Verificar un enlace de afiliado válido antes de incluir ofertas en borradores.
-5. Evaluar hosting gratuito y despliegue solo después de comprobar límites y solicitar aprobación cuando corresponda.
+1. Integrar los formularios del frontend con el endpoint y mostrar estados de carga/error.
+2. Agregar autenticación, cuotas persistentes, observabilidad y controles antiabuso.
+3. Elegir hosting gratuito y validar sus límites antes de desplegar.
+4. Verificar enlaces afiliados y permisos de publicación.
+5. Mantener revisión humana antes de publicar cualquier contenido.
