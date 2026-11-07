@@ -18,38 +18,78 @@ function send(res, status, data) {
 function readBody(req) {
   return new Promise((resolve, reject) => {
     let raw = '';
+    let settled = false;
+
     req.on('data', chunk => {
-      raw += chunk;
-      if (raw.length > MAX_BODY) { reject(new Error('too_large')); req.destroy(); }
+      if (settled) return;
+      raw += chunk.toString('utf8');
+      if (Buffer.byteLength(raw, 'utf8') > MAX_BODY) {
+        settled = true;
+        reject(new Error('too_large'));
+        // Drain the request so the server can return a 413 instead of resetting
+        // the socket while the client is still sending its body.
+        req.resume();
+      }
     });
+
     req.on('end', () => {
-      try { resolve(JSON.parse(raw || '{}')); } catch { reject(new Error('invalid_json')); }
+      if (settled) return;
+      try {
+        resolve(JSON.parse(raw || '{}'));
+      } catch {
+        reject(new Error('invalid_json'));
+      }
     });
-    req.on('error', reject);
+
+    req.on('error', error => {
+      if (settled) return;
+      settled = true;
+      reject(error);
+    });
   });
 }
 
-export function createApiServer({ apiKey = process.env.GEMINI_API_KEY, fetchImpl = fetch, now = Date.now } = {}) {
+export function createApiServer({
+  apiKey = process.env.GEMINI_API_KEY,
+  fetchImpl = fetch,
+  now = Date.now,
+  getClientIp = req => req.socket.remoteAddress || 'unknown'
+} = {}) {
   const buckets = new Map();
+
   return http.createServer(async (req, res) => {
     if (req.method === 'GET' && req.url === '/api/health') {
       return send(res, 200, { ok: true, provider: 'Gemini', model: MODEL, configured: Boolean(apiKey) });
     }
-    if (req.method !== 'POST' || req.url !== '/api/generate') return send(res, 404, { error: 'Ruta no encontrada.' });
-    if (!apiKey) return send(res, 503, { error: 'La IA todavía no está configurada en el servidor.' });
+    if (req.method !== 'POST' || req.url !== '/api/generate') {
+      return send(res, 404, { error: 'Ruta no encontrada.' });
+    }
+    if (!apiKey) {
+      return send(res, 503, { error: 'La IA todavía no está configurada en el servidor.' });
+    }
 
-    const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.socket.remoteAddress || 'unknown';
+    // Do not trust X-Forwarded-For by default: clients can spoof it and bypass
+    // the in-memory rate limit. Deployments behind a proxy may inject a
+    // trusted getClientIp implementation after configuring that proxy.
+    const ip = getClientIp(req) || 'unknown';
     const current = now();
     const bucket = (buckets.get(ip) || []).filter(time => current - time < WINDOW_MS);
-    if (bucket.length >= MAX_REQUESTS) return send(res, 429, { error: 'Límite temporal alcanzado. Probá de nuevo en un minuto.' });
+    if (bucket.length >= MAX_REQUESTS) {
+      buckets.set(ip, bucket);
+      return send(res, 429, { error: 'Límite temporal alcanzado. Probá de nuevo en un minuto.' });
+    }
     bucket.push(current);
     buckets.set(ip, bucket);
 
     let body;
-    try { body = await readBody(req); }
-    catch (error) {
-      return send(res, error.message === 'too_large' ? 413 : 400, { error: 'La solicitud no es válida o es demasiado grande.' });
+    try {
+      body = await readBody(req);
+    } catch (error) {
+      return send(res, error.message === 'too_large' ? 413 : 400, {
+        error: 'La solicitud no es válida o es demasiado grande.'
+      });
     }
+
     const tasks = new Set(['fitness', 'marketing', 'video_script']);
     const task = typeof body.task === 'string' ? body.task : '';
     const details = typeof body.details === 'string' ? body.details.trim() : '';
@@ -64,15 +104,24 @@ export function createApiServer({ apiKey = process.env.GEMINI_API_KEY, fetchImpl
         signal: AbortSignal.timeout(30_000),
         body: JSON.stringify({
           system_instruction: { parts: [{ text: SYSTEM }] },
-          contents: [{ role: 'user', parts: [{ text: `Tarea: ${task}\nDatos y preferencias: ${details}\nDevolvé un borrador útil y concreto para revisión humana.` }] }],
+          contents: [{
+            role: 'user',
+            parts: [{ text: `Tarea: ${task}\nDatos y preferencias: ${details}\nDevolvé un borrador útil y concreto para revisión humana.` }]
+          }],
           generationConfig: { temperature: 0.6, maxOutputTokens: 1200 }
         })
       });
+
       if (!upstream.ok) {
-        if (upstream.status === 429) return send(res, 429, { error: 'La cuota o el límite de Gemini está temporalmente agotado. No se activó facturación.' });
-        if (upstream.status === 401 || upstream.status === 403) return send(res, 502, { error: 'Gemini rechazó la autenticación o el acceso del proyecto. Revisá la clave y el nivel de acceso.' });
+        if (upstream.status === 429) {
+          return send(res, 429, { error: 'La cuota o el límite de Gemini está temporalmente agotado. No se activó facturación.' });
+        }
+        if (upstream.status === 401 || upstream.status === 403) {
+          return send(res, 502, { error: 'Gemini rechazó la autenticación o el acceso del proyecto. Revisá la clave y el nivel de acceso.' });
+        }
         return send(res, 502, { error: 'El proveedor de IA no pudo completar la solicitud.' });
       }
+
       const payload = await upstream.json();
       const text = payload.candidates?.[0]?.content?.parts?.map(part => part.text || '').join('').trim();
       if (!text) return send(res, 502, { error: 'Gemini no devolvió contenido utilizable.' });
