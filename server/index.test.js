@@ -120,3 +120,66 @@ test('rate limit cannot be bypassed by changing an untrusted X-Forwarded-For hea
     assert.equal(limited.status, 429);
   });
 });
+
+
+test('maps Gemini quota exhaustion to a clear 429 response without billing activation', async () => {
+  await withServer({
+    apiKey: 'secret-test',
+    fetchImpl: async () => new Response('{}', { status: 429 })
+  }, async base => {
+    const response = await fetch(base + '/api/generate', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ task: 'marketing', details: 'Borrador de publicación' })
+    });
+    assert.equal(response.status, 429);
+    assert.match((await response.json()).error, /No se activó facturación/);
+  });
+});
+
+test('maps Gemini authentication failures to a safe 502 response', async () => {
+  for (const status of [401, 403]) {
+    await withServer({
+      apiKey: 'secret-test',
+      fetchImpl: async () => new Response('{}', { status })
+    }, async base => {
+      const response = await fetch(base + '/api/generate', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ task: 'fitness', details: '10 minutos' })
+      });
+      assert.equal(response.status, 502);
+      assert.match((await response.json()).error, /Revisá la clave/);
+    });
+  }
+});
+
+test('rejects a successful Gemini response without usable text', async () => {
+  await withServer({
+    apiKey: 'secret-test',
+    fetchImpl: async () => new Response(JSON.stringify({ candidates: [] }), { status: 200 })
+  }, async base => {
+    const response = await fetch(base + '/api/generate', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ task: 'video_script', details: 'Guion breve' })
+    });
+    assert.equal(response.status, 502);
+    assert.match((await response.json()).error, /no devolvió contenido utilizable/);
+  });
+});
+
+test('converts provider network failures into a controlled 504 response', async () => {
+  await withServer({
+    apiKey: 'secret-test',
+    fetchImpl: async () => { throw new Error('simulated upstream network failure'); }
+  }, async base => {
+    const response = await fetch(base + '/api/generate', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ task: 'marketing', details: 'Borrador' })
+    });
+    assert.equal(response.status, 504);
+    assert.match((await response.json()).error, /agotó el tiempo o falló la conexión/);
+  });
+});
