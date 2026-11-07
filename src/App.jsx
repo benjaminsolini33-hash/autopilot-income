@@ -21,7 +21,7 @@ export default function App() {
   const [aiStatus, setAiStatus] = useState('Comprobando backend…');
 
   useEffect(() => {
-    fetch('/api/health').then(r => r.json()).then(data => setAiStatus(data.configured ? 'Gemini disponible · ' + data.model : 'Backend listo; falta configurar la clave local')).catch(() => setAiStatus('Backend todavía no iniciado'));
+    fetch('/api/health').then(r => r.json()).then(data => setAiStatus(data.configured ? 'Clave de Gemini configurada · ' + data.model : 'Backend responde; falta configurar GEMINI_API_KEY')).catch(() => setAiStatus('Backend todavía no iniciado'));
   }, []);
 
   async function copy(text) {
