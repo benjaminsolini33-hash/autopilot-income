@@ -17,7 +17,7 @@ Prototipo independiente de Autopilot Income: asistente de movimiento en casa, bo
 - El modelo está fijado en el backend como `gemini-3.8-flash`. La disponibilidad y cuota deben verificarse en la cuenta de Google correspondiente.
 - Límite básico: 8 solicitudes por minuto y por IP en cada instancia. Se almacena en memoria; no es un limitador distribuido ni persistente.
 - No hay autenticación, base de datos, cola de trabajos, orquestador MCP, publicación social ni campañas automáticas implementadas en este prototipo.
-- La existencia del endpoint backend no demuestra que los formularios del frontend estén conectados; verificar esa integración antes de desplegar.
+- La interfaz (`src/App.jsx`) consulta `/api/health` al abrirse y llama a `/api/generate` cuando el usuario solicita generación con Gemini. La integración frontend/backend está implementada para desarrollo local; la conexión real con Google requiere una clave válida y cuota disponible.
 - No se configura hosting ni facturación. La disponibilidad gratuita depende de las cuotas y condiciones vigentes del proveedor.
 - No enviar datos personales sensibles a proveedores externos.
 - La aplicación Floot original se conserva sin cambios: https://autopilot-income.floot.app
@@ -48,8 +48,8 @@ npm run build
 
 ## Próximos pasos antes de producción
 
-1. Confirmar la integración real de los formularios con el endpoint y mostrar estados de carga/error.
-2. Agregar autenticación, cuotas persistentes, observabilidad y controles antiabuso.
+1. Probar una solicitud real a Gemini con una clave configurada por el usuario, sin habilitar facturación, y verificar los estados de carga, éxito y error.
+2. Agregar autenticación, cuotas persistentes, observabilidad y controles antiabuso antes de exponer el endpoint públicamente.
 3. Elegir hosting y validar sus límites, costos y manejo de secretos antes de desplegar.
 4. Verificar enlaces afiliados, condiciones comerciales y permisos de publicación.
 5. Mantener revisión humana antes de publicar cualquier contenido.
