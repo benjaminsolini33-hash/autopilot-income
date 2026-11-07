@@ -9,7 +9,8 @@ Autopilot Fit AI es un prototipo web con plantillas locales de fitness y marketi
 ## Componentes verificados
 
 ### Frontend y lógica local
-- `src/agentLogic.js` exporta `createFitnessPlan()` y `makeDraft()`.
+- `src/App.jsx` implementa la interfaz, consulta `GET /api/health` al iniciar y envía `POST /api/generate` cuando el usuario pulsa la generación con Gemini.
+- `src/agentLogic.js` exporta `createFitnessPlan()` y `makeDraft()` para las plantillas locales.
 - Las plantillas locales generan orientación general de movimiento, borradores de marketing, calendarios semanales y prompts/guiones de video.
 - Los textos generados son borradores. No se genera un archivo de video, no se publica en redes y no se ejecutan campañas desde estas funciones.
 - La lógica local contiene un CTA hacia `https://autopilot-income.floot.app/entrenador`; verificar manualmente disponibilidad y comportamiento antes de usarlo en una campaña.
@@ -36,7 +37,7 @@ El nombre del modelo está fijado en el código como `gemini-3.8-flash`. Este do
 
 ## Límites y riesgos pendientes
 
-1. No se verificó en esta auditoría que los formularios de la interfaz estén conectados a `POST /api/generate`; la existencia del endpoint no demuestra integración desde el navegador.
+1. La integración desde la interfaz al backend está implementada para desarrollo local mediante el proxy de Vite. Todavía falta probar una llamada real contra Gemini con una clave válida; el CI usa respuestas simuladas y no valida credenciales ni cuota del proveedor.
 2. No hay autenticación de usuarios ni autorización por cuenta.
 3. El rate limit es local a cada proceso y se pierde al reiniciar; no es una cuota persistente ni distribuida.
 4. No hay base de datos, cola de tareas, workers remotos ni orquestador MCP implementados en este prototipo.
@@ -48,9 +49,9 @@ El nombre del modelo está fijado en el código como `gemini-3.8-flash`. Este do
 ## Próximos pasos recomendados
 
 ### P0 — Verificación antes de ampliar
-- Confirmar si la UI llama al backend y probar los estados de carga, error y éxito.
-- Ejecutar `npm test` y `npm run build` en un entorno limpio.
-- Verificar el modelo y las cuotas en la consola oficial de Google sin habilitar facturación.
+- Probar una solicitud real a Gemini con una clave configurada por el usuario, sin habilitar facturación, y revisar estados de carga, error y éxito.
+- Mantener `npm test` y `npm run build` como verificaciones obligatorias en CI; la rama de endurecimiento ya añadió esas comprobaciones.
+- Verificar modelo, permisos y cuotas en el proyecto de Google correspondiente.
 - Confirmar que no haya secretos en el historial de Git.
 
 ### P1 — Endurecimiento
