@@ -3,12 +3,12 @@
 > Estado: borrador editorial para revisión manual. No es un video terminado.
 > Formato: TikTok / Instagram Reels / YouTube Shorts, vertical 9:16, 28–32 s, español rioplatense.
 > Producción faceless. Movimiento real y continuo; no usar diapositivas estáticas ni zoom repetitivo.
-> CTA: https://autopilot-income.floot.app/entrenador
+> CTA: guardar el checklist. No dirigir al entrenador virtual hasta validar el flujo de acceso y comunicar sus créditos.
 > Guardrails: sin promesas médicas, pérdida de peso, resultados garantizados, testimonios ni enlace afiliado.
 
 ## Objetivo
 
-Construir confianza con un consejo útil: antes de copiar una rutina viral, revisar si explica nivel, adaptaciones y descanso. Presentar el entrenador virtual como una herramienta para conocer, no prometer que diagnostica ni reemplaza a un profesional.
+Construir confianza con un consejo útil: antes de copiar una rutina viral, revisar si explica nivel, adaptaciones y descanso. No presentar el entrenador virtual como sustituto de un profesional.
 
 ## Ganchos alternativos
 
@@ -25,11 +25,11 @@ Construir confianza con un consejo útil: antes de copiar una rutina viral, revi
 | 9–15 s | Se despeja un espacio y se mueve una silla; corte a un temporizador que comienza a correr. | «Segundo: ¿muestra alternativas y explica cuándo descansar?» | 2 · ¿HAY ADAPTACIONES Y DESCANSO? |
 | 15–22 s | Calzado deportivo entra en cuadro; plano lateral de una persona caminando de forma natural, sin mostrar el rostro. | «Tercero: ¿explica la técnica o solamente muestra resultados?» | 3 · ¿EXPLICA CÓMO HACERLO? |
 | 22–27 s | El celular se bloquea y queda junto a la libreta; la cámara hace un paneo corto y continuo. | «Si promete lo mismo para todo el mundo o garantiza resultados, tomalo con cautela.» | DESCONFIÁ DE LAS PROMESAS GARANTIZADAS |
-| 27–32 s | Cierre limpio de marca con CTA; transición breve que pueda enlazar con el inicio. | «Elegí información clara y algo que puedas adaptar. Conocé el entrenador virtual de Autopilot Fit AI.» | CONOCÉ EL ENTRENADOR VIRTUAL · LINK EN PERFIL |
+| 27–32 s | Cierre limpio de marca; la libreta queda abierta en los tres puntos del checklist. | «Elegí información clara y algo que puedas adaptar. Guardá este checklist antes de probar una rutina.» | GUARDÁ EL CHECKLIST |
 
 ## Voz en off completa
 
-«¿Viste una rutina viral? Antes de copiarla, mirá esto. Primero: ¿explica para qué nivel está pensada? Segundo: ¿muestra alternativas y explica cuándo descansar? Tercero: ¿explica la técnica o solamente muestra resultados? Si promete lo mismo para todo el mundo o garantiza resultados, tomalo con cautela. Elegí información clara y algo que puedas adaptar. Conocé el entrenador virtual de Autopilot Fit AI.»
+«¿Viste una rutina viral? Antes de copiarla, mirá esto. Primero: ¿explica para qué nivel está pensada? Segundo: ¿muestra alternativas y explica cuándo descansar? Tercero: ¿explica la técnica o solamente muestra resultados? Si promete lo mismo para todo el mundo o garantiza resultados, tomalo con cautela. Elegí información clara y algo que puedas adaptar. Guardá este checklist antes de probar una rutina.»
 
 ## Portada
 
@@ -39,11 +39,11 @@ Construir confianza con un consejo útil: antes de copiar una rutina viral, revi
 
 «Una rutina viral no necesariamente está pensada para todas las personas. Antes de probarla, revisá si explica el nivel, las adaptaciones, el descanso y la técnica. Desconfiá de las promesas de resultados garantizados. Si un movimiento genera dolor o malestar, frená; ante lesiones o condiciones de salud, buscá orientación profesional.
 
-Conocé el entrenador virtual de Autopilot Fit AI: https://autopilot-income.floot.app/entrenador»
+Guardá este checklist y volvé a mirarlo antes de probar una rutina.»
 
 ## CTA
 
-«Conocé el entrenador virtual desde el enlace del perfil.»
+«Guardalo para revisarlo antes de probar una rutina.»
 
 ## Hashtags
 
@@ -59,6 +59,7 @@ Conocé el entrenador virtual de Autopilot Fit AI: https://autopilot-income.floo
 - Revisar anatomía, continuidad, legibilidad móvil, ortografía, audio y CTA escena por escena.
 - No usar comparativas corporales, básculas, antes/después ni testimonios.
 - No incluir HotLink ni claims de pérdida de peso/desinflamación.
+- El flujo /entrenador exige iniciar sesión y cada respuesta correcta consume 1 crédito de IA; no dirigir tráfico allí hasta verificar acceso y explicar los créditos en la landing.
 - Entregar MP4 final solo cuando exista una ruta de generación/exportación gratuita confirmada y el resultado haya sido inspeccionado. Este archivo es únicamente el guion.
 
 ## Presupuesto y estado
