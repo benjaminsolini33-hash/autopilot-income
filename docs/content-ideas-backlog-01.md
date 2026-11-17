@@ -10,7 +10,7 @@
 | Prioridad | Idea / gancho | Pilar | Enfoque útil | Riesgo a controlar |
 |---|---|---|---|---|
 | Alta | «¿Más agujetas significa que entrenaste mejor?» | Recuperación | Diferenciar dolor muscular y adaptación | No glorificar dolor ni diagnosticar |
-| Alta | «¿Qué significa RPE en una rutina?» | Vocabulario de entrenamiento | Explicar escala subjetiva de esfuerzo | No prescribir un RPE objetivo |
+| Alta | «¿Qué significa tempo en una rutina?» | Vocabulario de entrenamiento | Explicar que tempo describe el ritmo de las fases de una repetición cuando la rutina lo especifica | No prescribir un tempo universal |
 | Alta | «¿Por qué anotar cómo se sintió una serie?» | Registro | Contextualizar carga, técnica y esfuerzo | No convertirlo en plan personalizado |
 | Media | «¿Qué revisar antes de comprar una botella para el gym?» | Hábitos | Capacidad, tapa, limpieza y facilidad de transporte | No recomendar marcas sin comparación |
 | Media | «¿Qué dejar preparado en el bolso del gym?» | Organización | Lista simple: ropa, agua, toalla y candado si aplica | No sugerir suplementos |
@@ -19,6 +19,10 @@
 | Media | «¿Cómo guardar recetas para encontrarlas después?» | Organización | Etiquetas por ingrediente, tiempo y utensilios | No hacer claims nutricionales |
 | Baja | «¿Qué llevar anotado a una consulta con un entrenador?» | Educación | Objetivo, experiencia, preferencias y dudas | No solicitar datos médicos sensibles |
 | Baja | «¿Qué revisar en una rutina antes de empezar?» | Criterio | Nivel, técnica, adaptaciones, descanso y equipo | No sustituir evaluación profesional |
+
+## Ideas desarrolladas
+
+- «¿Qué significa RPE en una rutina?» se desarrolló como piloto 20. Mantener la cautela sobre las distintas escalas y no asumir una equivalencia universal entre RPE y RIR.
 
 ## Regla de producción
 
