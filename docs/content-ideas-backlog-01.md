@@ -9,8 +9,7 @@
 
 | Prioridad | Idea / gancho | Pilar | Enfoque útil | Riesgo a controlar |
 |---|---|---|---|---|
-| Alta | «¿Por qué anotar cómo se sintió una serie?» | Registro | Contextualizar carga, técnica y esfuerzo | No convertirlo en plan personalizado |
-| Alta | «¿Qué revisar antes de comparar dos rutinas?» | Criterio | Revisar objetivo declarado, equipo, experiencia y claridad de instrucciones | No recomendar una rutina individual |
+| Alta | «¿Qué revisar antes de comparar dos rutinas?» | Criterio | Revisar objetivo declarado, equipo, experiencia, instrucciones y contexto antes de comparar | No recomendar una rutina individual ni inferir resultados por una sola variable |
 | Media | «¿Qué revisar antes de comprar una botella para el gym?» | Hábitos | Capacidad, tapa, limpieza y facilidad de transporte | No recomendar marcas sin comparación |
 | Media | «¿Qué dejar preparado en el bolso del gym?» | Organización | Lista simple: ropa, agua, toalla y candado si aplica | No sugerir suplementos |
 | Media | «¿Cómo elegir una receta según el tiempo que tenés?» | Organización de comidas | Separar preparación activa, cocción y espera | No prometer resultados nutricionales |
@@ -21,9 +20,11 @@
 
 ## Ideas desarrolladas
 
+- «¿Por qué anotar cómo se sintió una serie?» se desarrolló como piloto 23. La nota es descriptiva; no equivale a una escala RPE/RIR ni determina ajustes de carga.
 - «¿Qué significa RPE en una rutina?» se desarrolló como piloto 20. Mantener la cautela sobre las distintas escalas y no asumir una equivalencia universal entre RPE y RIR.
 - «¿Qué significan los números del tempo en una rutina?» se desarrolló como piloto 21. El ejemplo 2/0/3/0 usa una convención de cuatro fases; pedir siempre que se revise la leyenda de cada rutina y no afirmar que más lento sea mejor.
 - «¿Qué significa rango de movimiento (ROM)?» se desarrolló como piloto 22. Definir ROM como el recorrido de una articulación; distinguir completo y parcial sin prescribir amplitud individual ni sugerir atravesar dolor.
+- «¿Qué revisar antes de comparar dos rutinas?» queda como próxima idea de prioridad alta.
 
 ## Regla de producción
 
