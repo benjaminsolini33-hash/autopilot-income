@@ -16,7 +16,6 @@
 - Grabar dos tomas con el celular en un ambiente silencioso, a una distancia constante del micrófono.
 - Elegir la toma más clara, no necesariamente la más rápida.
 - Si la toma supera 35 segundos, ampliar el timeline y reajustar subtítulos; no cortar palabras ni comprimir la voz.
-- No se generó TTS: los modelos de audio visibles en InVideo tienen coste en créditos y el saldo comprobado es 0.
 
 ## 3. Subtítulos
 
@@ -29,14 +28,17 @@ Los tiempos son una primera sincronización sobre el montaje de 35 segundos. Aju
 - Ubicar subtítulos en la zona inferior segura, sin tapar las placas de texto ni elementos relevantes.
 - Alto contraste y tamaño legible en pantalla móvil.
 - No duplicar literalmente una placa de título con el subtítulo si genera saturación.
+- El SRT todavía no está importado al timeline; la colección de audio clips está vacía y las ocho placas existentes son títulos, no subtítulos de la locución.
 
 ## 4. Mezcla y exportación
 
 - Priorizar inteligibilidad de la voz.
-- Si se incorpora música, utilizar solo una pista cuya licencia y disponibilidad gratuita estén verificadas en el proyecto; mantenerla claramente por debajo de la voz.
+- Verificación de InVideo del 23/11: la búsqueda de stock_music devolvió pistas a 0,5 créditos cada una. No se encontró música a coste cero; con saldo de 0 créditos, no añadir ninguna pista ni intentar generarla.
+- Los modelos TTS listados cobran créditos; no hay una opción gratuita confirmada.
 - No usar modelos TTS, música generativa ni herramientas con coste en créditos.
 - Exportar una copia nueva como borrador; conservar el MP4 visual v2 original.
 - Revisar el archivo completo en un teléfono antes de aprobarlo.
+- La captura de ocho fotogramas del timeline se solicitó, pero la imagen remota no pudo incorporarse a esta sesión; no declarar una revisión visual fotograma a fotograma completada.
 
 ## 5. Copy de publicación — borrador
 
@@ -62,5 +64,6 @@ Dos rutinas pueden compartir ejercicios y, aun así, estar organizadas para cont
 ## 7. Presupuesto y límites
 
 - Saldo InVideo comprobado: 0 créditos.
-- Los modelos TTS listados cobran créditos; no hay una opción gratuita confirmada.
+- Stock music verificado: 0,5 créditos por pista en los resultados consultados.
+- Los modelos TTS visibles cobran créditos; no hay una opción gratuita confirmada.
 - No se compraron créditos, no se inició trial, no se generó audio ni video y no se publicó nada.
