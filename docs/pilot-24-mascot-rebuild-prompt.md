@@ -17,23 +17,23 @@ Rasgos visibles para conservar:
 
 El clip de referencia contiene subtítulos incrustados y una escena de cocina asociada a una promoción de recetas. Usarlo **solo como referencia de identidad visual del personaje**. No copiar sus textos, oferta, libro, claims, música ni composición. No reutilizar el montaje promocional.
 
-## Voz en off final — versión breve
+## Voz en off final — versión revisada (69 palabras)
 
-«¿Dos rutinas tienen los mismos ejercicios? No significa que sean iguales. Mirá qué objetivo propone cada una, qué equipo necesita y dónde podés hacerla. Compará series, repeticiones y descansos. Revisá para qué nivel está pensada, si explica la técnica y ofrece alternativas. Después, compará con tu experiencia, tu tiempo y tus preferencias. No elijas por una cifra ni porque sea viral. Guardá este checklist.»
+«¿Dos rutinas usan los mismos ejercicios? Igual pueden ser muy distintas. Mirá qué objetivo tiene cada una, qué equipo requiere y dónde podés hacerla. Después compará series, repeticiones y descansos. Fijate para qué nivel está pensada, si explica la técnica y si ofrece alternativas. Tené en cuenta tu experiencia, el tiempo que tenés y tus preferencias. No elijas solo por una cifra ni porque sea viral. Guardá este checklist.»
 
-Dirección: voz natural rioplatense, clara y cercana; 120–130 palabras por minuto, sin tono publicitario agresivo. Grabar o generar la voz por separado y sincronizarla en edición. No acelerar para forzar la duración.
+Dirección: voz natural rioplatense, clara y cercana; objetivo aproximado 125–130 palabras por minuto, con pausas breves entre criterios. No acelerar para forzar la duración. Grabar la voz por separado; no generar TTS mientras el saldo/coste no esté confirmado como cero.
 
 ## Storyboard — 30 a 33 segundos
 
 | Tiempo | Acción y cámara | Texto a añadir en edición |
 |---|---|---|
-| 0–3 s | Hook visual: el mismo esqueleto entra en un gimnasio moderno; dos tarjetas de rutina cruzan el encuadre. Push-in rápido hacia sus ojos; el personaje compara ambas con curiosidad. | ¿DOS RUTINAS IGUALES? |
-| 3–7 s | Cámara sobre el hombro; el personaje señala el campo «objetivo» de cada tarjeta. Las tarjetas se separan en profundidad, no como diapositivas planas. | 1 · OBJETIVO |
-| 7–11 s | Tracking lateral: aparecen una colchoneta y mancuernas reales en el espacio; el personaje mira el equipo y señala el lugar disponible. | 2 · EQUIPO Y LUGAR |
-| 11–16 s | Tres elementos 3D —bloques, repeticiones abstractas y temporizador— giran alrededor de las tarjetas. El personaje los ordena con un gesto. No mostrar cifras que parezcan una prescripción. | 3 · SERIES, REPS Y DESCANSO |
-| 16–21 s | Push-in a una tarjeta de nivel con iconos simples de instrucciones y alternativas. El personaje asiente y marca los campos con una luz azul sutil. | 4 · NIVEL Y EXPLICACIONES |
-| 21–26 s | Reloj, calendario y tres iconos discretos (experiencia, tiempo, preferencias) orbitan al personaje; cámara hace un arco corto de 120°. | 5 · TU CONTEXTO |
-| 26–33 s | El personaje junta las tarjetas, muestra un checklist limpio y señala un icono de guardar. Pull-back; las dos tarjetas vuelven a entrar por el mismo lado que al inicio para cerrar en loop. | COMPARÁ CON CONTEXTO · GUARDÁ EL CHECKLIST |
+| 0–5,2 s | El mismo esqueleto entra en un gimnasio moderno; dos tarjetas de rutina cruzan el encuadre. Push-in hacia sus ojos; compara ambas con curiosidad. | ¿DOS RUTINAS IGUALES? |
+| 5,2–8,1 s | Cámara sobre el hombro; señala el campo «objetivo» de cada tarjeta. | 1 · OBJETIVO |
+| 8,1–11,4 s | Tracking lateral: aparecen una colchoneta y mancuernas; mira el equipo y señala el espacio disponible. | 2 · EQUIPO Y LUGAR |
+| 11,4–14,3 s | Bloques, repeticiones abstractas y temporizador giran alrededor de las tarjetas; el personaje los ordena. No mostrar cifras prescriptivas. | 3 · SERIES, REPS Y DESCANSO |
+| 14,3–21 s | Push-in a una tarjeta de nivel con iconos de instrucciones y alternativas. El personaje asiente y marca los campos con luz azul sutil. | 4 · NIVEL Y EXPLICACIONES |
+| 21–26,7 s | Reloj, calendario e iconos de experiencia, tiempo y preferencias orbitan al personaje; arco de cámara corto. | 5 · TU CONTEXTO |
+| 26,7–33 s | Junta las tarjetas, muestra un checklist y señala «guardar». Pull-back; las tarjetas vuelven a entrar por el mismo lado para cerrar en loop. | COMPARÁ CON CONTEXTO · GUARDÁ EL CHECKLIST |
 
 ## Prompt maestro — pegar en la herramienta de video
 
@@ -75,12 +75,12 @@ Dos rutinas pueden compartir ejercicios y aun así estar pensadas para contextos
 - [ ] El CTA es «Guardá este checklist»; no hay enlace al entrenador ni afiliación.
 - [ ] Se revisa el MP4 completo en móvil antes de aprobarlo.
 
-## Presupuesto y límites
+## Presupuesto y límites — auditoría 25/11/2026
 
-- InVideo: 0 créditos en la comprobación del 24/11.
-- Stock music consultado: 0,5 créditos por pista; no se añadió.
-- Runway: 0 créditos y ningún modelo de video habilitado.
-- Higgsfield: 10 créditos generales, pero 0 generaciones gratuitas de video; no se usaron.
-- HeyGen: plan Free, saldo de créditos no disponible; no se generó.
-- Meta AI/Vibes: no existe una integración de generación de video en las herramientas conectadas; el conector Meta disponible es WhatsApp Business.
+- InVideo: 0 créditos. Las exportaciones de timeline están documentadas como gratuitas, pero las generaciones de video no se pueden iniciar con saldo cero.
+- La biblioteca del proyecto contiene stock de audio, pero añadir stock mediante `add_media` cobra una tarifa en créditos; no se añadió.
+- Runway: la comprobación automática de hoy requirió interacción y no pudo completarse. La última auditoría del 24/11 registró Free, 0 créditos y ningún modelo de video habilitado.
+- Higgsfield: la lista actual de contadores gratuitos muestra 0 generaciones gratuitas de video y 5 generaciones gratuitas de AI Influencer Sheet; no se usaron. El saldo general no se revalidó hoy.
+- HeyGen: plan Free; premium/add-on credits aparecen como no disponibles (`null`). Hay voces públicas es-ES y es-MX, pero no locale es-AR en el catálogo consultado. No se generó TTS.
+- Meta: el conector disponible es WhatsApp Business, no Meta AI/Vibes; ping exitoso y 0 negocios accesibles.
 - No se generó, exportó ni publicó este rebuild.
