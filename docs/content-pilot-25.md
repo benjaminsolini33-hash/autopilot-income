@@ -1,8 +1,9 @@
 # Piloto 25 — Prepará el espacio antes de moverte en casa
 
-> Estado: borrador educativo para revisión manual; no es un video terminado.
-> Formato: TikTok / Instagram Reels / YouTube Shorts · vertical 9:16 · 28–30 s · español rioplatense.
-> Producción: faceless con acciones reales y continuas; sin rostro, sin mascota obligatoria y sin generación de IA.
+> Estado: render privado generado en HeyGen para revisión manual; no está aprobado ni publicado.
+> Formato solicitado: TikTok / Instagram Reels / YouTube Shorts · vertical 9:16 · objetivo editorial 28–30 s · español rioplatense.
+> Render disponible: 24,111 s; queda por debajo del objetivo y requiere revisión humana.
+> Producción: faceless, voz en off y subtítulos incorporados; sin avatar ni música, según el registro de la sesión.
 > Guardrails: checklist práctico del espacio; no es una evaluación completa de seguridad ni una indicación individual.
 
 ## Objetivo editorial
@@ -55,9 +56,21 @@ Dar un checklist simple para revisar el espacio doméstico antes de una pausa de
 - No usar logos ajenos, testimonios, comparativas corporales, claims médicos, promesas de resultados ni HotLink.
 - No incluir CTA al entrenador hasta verificar el acceso/login y la información de consumo de créditos en la ruta pública.
 
+## Render generado — 2026-11-27
+
+- **Título:** Checklist: espacio listo para moverte en casa.
+- **HeyGen Video ID:** `0e75e3acdd2a4c3fa40a723135e7d6e0`.
+- **Página del video:** https://app.heygen.com/videos/0e75e3acdd2a4c3fa40a723135e7d6e0
+- **Duración real informada:** 24,111 s; no alcanza el objetivo de 28–30 s.
+- **Estado:** completed; borrador privado para revisión manual, sin publicación ni programación.
+- **Formato de entrega:** MP4 con subtítulos incorporados disponible en la biblioteca de HeyGen.
+- **Audio y presentador:** el registro de la sesión indica voz en off, sin música y sin avatar.
+- **Control pendiente:** no se ha certificado la coincidencia palabra por palabra entre locución y guion, ni la calidad visual, los márgenes seguros, la continuidad o la mezcla. Revisar el MP4 completo antes de aprobarlo.
+- **Cuota:** cuenta HeyGen Free; la única cuota mensual de Video Agent figura consumida (0/1 restante) y se reinicia el 30/11/2026. La cuota estándar de videos figura en 3/3 restantes. No se compraron créditos ni se contrató un plan.
+
 ## Checklist de revisión manual
 
-- [ ] El video es vertical 9:16 y dura 28–30 s.
+- [ ] El video es vertical 9:16 y su duración final se acepta editorialmente; si se exige 28–30 s, rehacer el montaje con medios propios y sin otra generación de pago.
 - [ ] No aparece ningún rostro ni reflejo identificable.
 - [ ] Se ve una acción real y continua en cada escena; no es un slideshow.
 - [ ] La silla mostrada es estable y no tiene ruedas.
@@ -69,7 +82,7 @@ Dar un checklist simple para revisar el espacio doméstico antes de una pausa de
 
 ## Presupuesto y estado
 
-- Borrador textual listo para revisión manual.
-- No se generó ni exportó video.
-- No se añadieron medios de stock ni audio al timeline.
-- No comprar créditos, iniciar trials, contratar servicios, programar ni publicar automáticamente.
+- Render privado generado con la cuota mensual gratuita de HeyGen Video Agent.
+- No se compraron créditos ni se inició un plan pago.
+- No se publicó ni programó el video.
+- La aprobación visual y auditiva sigue pendiente.
