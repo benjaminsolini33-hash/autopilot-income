@@ -12,6 +12,7 @@
 |---|---|---|---|---|
 | Desarrollada | «¿Qué revisar antes de comparar dos rutinas?» | Criterio | Revisar objetivo declarado, equipo, estructura, nivel, instrucciones y contexto antes de comparar | No recomendar una rutina individual ni inferir resultados por una sola variable |
 | Desarrollada | «¿Vas a moverte en casa? Primero, prepará el espacio.» | Organización y seguridad práctica | Despejar el piso, apartar obstáculos, comprobar silla estable y dejar lo necesario cerca | No presentarlo como evaluación completa de seguridad ni indicación individual |
+| Desarrollada | «No dependas de acordarte: agendá tu próxima pausa.» | Organización de hábitos | Elegir un momento realista, crear un recordatorio simple, preparar elementos y reprogramar si cambia la agenda | No afirmar que un recordatorio garantiza constancia ni convertirlo en obligación |
 | Media | «¿Qué revisar antes de comprar una botella para el gym?» | Hábitos | Capacidad, tapa, limpieza y facilidad de transporte | No recomendar marcas sin comparación |
 | Media | «¿Qué dejar preparado en el bolso del gym?» | Organización | Lista simple: ropa, agua, toalla y candado si aplica | No sugerir suplementos |
 | Media | «¿Cómo elegir una receta según el tiempo que tenés?» | Organización de comidas | Separar preparación activa, cocción y espera | No prometer resultados nutricionales |
@@ -28,6 +29,7 @@
 - «¿Qué significa rango de movimiento (ROM)?» se desarrolló como piloto 22. Definir ROM como el recorrido de una articulación; distinguir completo y parcial sin prescribir amplitud individual ni sugerir atravesar dolor.
 - «¿Qué revisar antes de comparar dos rutinas?» se desarrolló como piloto 24. Es un checklist de contexto; no declara una rutina universalmente mejor ni prescribe un plan individual.
 - «¿Vas a moverte en casa? Primero, prepará el espacio» se desarrolló como piloto 25. Checklist práctico de piso despejado, obstáculos, apoyo estable y elementos cercanos; no sustituye una evaluación individual del espacio.
+- «No dependas de acordarte: agendá tu próxima pausa» se desarrolló como piloto 26. Recurso de organización de hábitos: elegir un momento realista, usar un recordatorio simple, preparar elementos y reprogramar sin culpa si cambia la agenda.
 
 ## Regla de producción
 
